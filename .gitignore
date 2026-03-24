@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Node.js
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# System
+.vscode/
+.idea/
+.DS_Store
+*.log
+
+# MediaPipe
+*.task
