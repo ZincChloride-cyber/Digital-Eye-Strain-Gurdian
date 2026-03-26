@@ -57,6 +57,26 @@ def gen_frames():
 def get_stats():
     return current_stats
 
+@app.post("/api/acknowledge_water")
+def acknowledge_water():
+    monitor.acknowledge_water()
+    return {"status": "success"}
+
+@app.get("/video_feed")
+def video_feed():
+    return StreamingResponse(gen_frames(),
+                             media_type='multipart/x-mixed-replace; boundary=frame')
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            await websocket.send_text(json.dumps(current_stats))
+            await asyncio.sleep(0.5)
+    except WebSocketDisconnect:
+        pass
+
 @app.get("/video_feed")
 def video_feed():
     return StreamingResponse(gen_frames(),

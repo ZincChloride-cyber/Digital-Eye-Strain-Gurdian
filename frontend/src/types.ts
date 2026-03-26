@@ -9,6 +9,7 @@ export interface Metrics {
     title: string;
     message: string;
   };
+  last_water_intake: number;
 }
 
 export interface ChartData {

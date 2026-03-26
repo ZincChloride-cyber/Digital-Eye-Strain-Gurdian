@@ -1,14 +1,15 @@
-# Digital Eye Strain Guardian
+# Ucare - AI-Powered Eye Health Guardian
 
-An AI-powered, privacy-focused background monitoring system designed to prevent digital eye strain. It uses computer vision to track blink rates, screen distance, and continuous usage time, providing intelligent alerts based on optometric best practices like the 20-20-20 rule.
+Ucare is a privacy-focused, "set and forget" well-being application designed for power users. It monitors eye strain signals in real time using your webcam locally, providing subtle alerts and a clean, high-performance dashboard for health optimization.
 
-## Features
+## Key Features
 
-- Real-time Blink Detection: Monitors blink rate (Blinks Per Minute) via Eye Aspect Ratio (EAR) using MediaPipe FaceLandmarker.
-- Screen Distance Estimation: Warns if you are sitting too close to the monitor (less than 45cm) for extended periods.
-- Continuous Usage Alerts: Reminds you to take breaks after 20 minutes of continuous screen time.
-- Integrated Dashboard: A modern, metallic-themed React dashboard providing live telemetry and trend charts.
-- Dual Alert System: Provides both OS-level toast notifications and in-app "popout" alerts for immediate feedback.
+- **Autonomous Monitoring**: Continuous, automatic eye tracking without manual controls (Pause/Stop removed for a seamless experience).
+- **Computer Vision Intelligence**: Real-time blink rate analysis and screen distance estimation via local CPU-friendly processing.
+- **Dynamic Risk Assessment**: Three levels of strain detection (Low/Medium/High) with tailored health advice.
+- **Privacy-First Architecture**: Zero cloud processing; no images or data ever leave your machine.
+- **Premium Metallic UI**: A high-impact dashboard optimized for dark-mode workstations.
+
 
 ## Tech Stack
 

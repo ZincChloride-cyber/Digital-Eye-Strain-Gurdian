@@ -7,6 +7,7 @@ BLINK_FRAMES = 2
 
 DISTANCE_THRESHOLD_CM = 45
 BREAK_INTERVAL_SEC = 20 * 60
+WATER_INTERVAL_SEC = 45 * 60 # Default to 45 minutes
 
 class StrainMonitor:
     def __init__(self):
@@ -21,6 +22,9 @@ class StrainMonitor:
         self.last_distance_alert = 0
         
         self.last_break_alert = 0
+        
+        self.last_water_intake = time.time()
+        self.last_water_alert = 0
         
         self.risk_level = "Low"
         self.current_alert: Optional[dict[str, str]] = None
@@ -60,6 +64,12 @@ class StrainMonitor:
             if now - self.last_break_alert > 5 * 60:
                 self.trigger_alert("Take a break!", "Follow the 20-20-20 rule. Look away 20 feet for 20 seconds.")
                 self.last_break_alert = now
+        
+        # Water reminder
+        if now - self.last_water_intake > WATER_INTERVAL_SEC:
+            if now - self.last_water_alert > 5 * 60:
+                self.trigger_alert("Stay Hydrated!", "It's time to drink some water.")
+                self.last_water_alert = now
                 
         if self.blinks_per_minute < 10 or (self.too_close_start and now - self.too_close_start > 60):
             self.risk_level = "High"
@@ -75,8 +85,13 @@ class StrainMonitor:
             "distance_cm": round(metrics.get("distance_cm", 0), 1) if metrics.get("distance_cm") else 0,
             "risk_level": self.risk_level,
             "ear": round(metrics.get("ear", 0), 3),
-            "alert": self.current_alert
+            "alert": self.current_alert,
+            "last_water_intake": int(now - self.last_water_intake)
         }
+    
+    def acknowledge_water(self):
+        self.last_water_intake = time.time()
+        self.last_water_alert = 0
         
     def trigger_alert(self, title, message):
         self.current_alert = {"title": title, "message": message}
@@ -84,7 +99,7 @@ class StrainMonitor:
             notification.notify(
                 title=title,
                 message=message,
-                app_name="Eye Strain Guardian",
+                app_name="Ucare",
                 timeout=5
             )
         except Exception as e:
