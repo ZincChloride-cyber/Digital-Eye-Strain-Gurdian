@@ -1,4 +1,4 @@
-# Ucare - AI-Powered Eye Health Guardian
+# Ucare - Wellbeing You
 
 Ucare is a privacy-focused, "set and forget" well-being application designed for power users. It monitors eye strain signals in real time using your webcam locally, providing subtle alerts and a clean, high-performance dashboard for health optimization.
 
